@@ -1,6 +1,5 @@
 package com.avinty.hr.service;
 
-import com.avinty.hr.domain.Department;
 import com.avinty.hr.domain.Employee;
 import com.avinty.hr.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +15,12 @@ import java.util.List;
 public class EmployeeService {
 
 
-    @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
 
     public Employee save(Employee employee) {

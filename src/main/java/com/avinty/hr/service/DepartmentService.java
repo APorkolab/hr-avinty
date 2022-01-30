@@ -1,9 +1,7 @@
 package com.avinty.hr.service;
 
 import com.avinty.hr.domain.Department;
-import com.avinty.hr.domain.Employee;
 import com.avinty.hr.repository.DepartmentRepository;
-import com.avinty.hr.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +15,12 @@ import java.util.List;
 public class DepartmentService {
 
 
-    @Autowired
     private DepartmentRepository departmentRepository;
+
+    @Autowired
+    public DepartmentService(DepartmentRepository departmentRepository) {
+        this.departmentRepository = departmentRepository;
+    }
 
 
     public Department save(Department department) {

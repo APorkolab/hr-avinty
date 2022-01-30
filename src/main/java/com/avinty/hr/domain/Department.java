@@ -1,15 +1,11 @@
 package com.avinty.hr.domain;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity
@@ -44,8 +40,13 @@ public class Department {
         private Integer updatedBy;
 
 
-        @ManyToMany(mappedBy = "departments")
-        private List<Employee> employees = new ArrayList<>();
+//        @ManyToMany(mappedBy = "departments")
+//        private List<Employee> employees = new ArrayList<>();
+
+
+//    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Employee.class)
+//    @JoinColumn(name = "id", insertable = false, updatable = false)
+//    private Employee employee;
 
 //        public void addEmployee(Employee employee) {
 //            employees.add(employee);

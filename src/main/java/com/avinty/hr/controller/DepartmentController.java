@@ -6,15 +6,13 @@ import com.avinty.hr.repository.DepartmentRepository;
 import com.avinty.hr.repository.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.Locale;
+
+@RestController
 @Slf4j
-@RequestMapping(path = "/department")
 @CrossOrigin(origins = {"http://localhost:8080", "http://localhost:8085", "http://localhost:5000"})
 public class DepartmentController {
 
@@ -22,30 +20,32 @@ public class DepartmentController {
 
 
     @Autowired
-    public DepartmentController(DepartmentRepository departmentRepository) {
+    public DepartmentController(DepartmentRepository departmentRepository, EmployeeRepository employeeRepository) {
         this.departmentRepository = departmentRepository;
     }
 
-    @GetMapping(value = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    //A little workaround has been made by me for the smoother user experience - no case-sensitive. It works with a chunk of word too.
+    //In the default case you have to use uppercase beginning of the string, e.g. "Human" instead of "human".
+    @GetMapping(value = "/API/V1/department")
     @CrossOrigin(origins = {"http://localhost:8080", "http://localhost:8085", "http://localhost:5000"})
-    public @ResponseBody
-    Iterable<Department> getDepartmentsByName(@PathVariable String name) {
-        return departmentRepository.findByNameContains(name);
+    public Iterable<Department> getDepartmentsByName(@RequestParam(name = "name") String name) {
+        String newString = name.toUpperCase(Locale.ROOT);
+        String newName = name.replace(name.charAt(0), newString.charAt(0));
+        return departmentRepository.findAllByNameContains(newName);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/API/V1/department/{id}")
+    @Transactional
     @CrossOrigin(origins = {"http://localhost:8080", "http://localhost:8085", "http://localhost:5000"})
-    public ResponseEntity<String> delete(@ModelAttribute("value")final Integer id) {
-        departmentRepository.deleteDepartmentById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public String delete(@PathVariable String id) {
+        departmentRepository.deleteDepartmentById(Integer.valueOf(id));
+        return "The requested department has been successfully deleted.";
     }
 
-
-
-
-//    public @ResponseBody
-//    Iterable<Entry> getWordTypes(@ModelAttribute("value") String wordType) {
-//        return entryRepository.findByWordTypeContains(wordType);
-//    }
-
+    @GetMapping(value = "/API/V1/dep-emp")
+    @CrossOrigin(origins = {"http://localhost:8080", "http://localhost:8085", "http://localhost:5000"})
+    public Iterable<Employee> getDepartmentsAndEmployees() {
+return null;
+//        return employeeRepository.findAllByDepartments();
+    }
 }

@@ -4,19 +4,13 @@ import com.avinty.hr.domain.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import java.util.Optional;
+import java.util.List;
 
-@RepositoryRestResource(path = "department")
+@RepositoryRestResource
 public interface DepartmentRepository extends JpaRepository<Department, Integer> { //CrudRepository
-    Iterable<Department> findByNameContains(String namePart);
+    List<Department> findAllByNameContains(String name);
     Department findDepartmentById(Integer id);
-    Iterable<Department> deleteDepartmentById(Integer id);
-
-//    Iterable<Department> findDepartmentsByEmployees();
-//    Iterable<Entry> findByHungarianContains(String namePart);
-//    Iterable<Entry> findByFieldOfExpertiseContains(String namePart);
-//    Iterable<Entry> findByWordTypeContains (String namePart);
-//    Iterable<Entry> findByEnglishContains(String namePart);
-
+    void deleteDepartmentById(Integer id);
+//    List<Department> findAllByManagerId();
 
 }

@@ -8,11 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> { //CrudRepository
     Iterable<Employee> findById(int id);
     Iterable<Employee> findByDepId(int id);
-
-//    Iterable<Entry> findByHungarianContains(String namePart);
-//    Iterable<Entry> findByFieldOfExpertiseContains(String namePart);
-//    Iterable<Entry> findByWordTypeContains (String namePart);
-//    Iterable<Entry> findByEnglishContains(String namePart);
-
+//    Iterable<Employee> findAllByDepartments();
 
 }

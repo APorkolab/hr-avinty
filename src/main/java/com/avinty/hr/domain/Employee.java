@@ -1,13 +1,10 @@
 package com.avinty.hr.domain;
 
-import javax.persistence.*;
-
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,34 +18,26 @@ import java.util.List;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @Column(length = 255)
     private String email;
 
-    @Column(length = 66)
     private String password;
 
-    @Column(name = "full_name", length = 200)
     private String fullName;
 
-    @Column(name = "dep_id")
-    private Integer depId;
+    private int depId;
 
-    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "createdBy")
-    private Integer createdBy;
+    private int createdBy;
 
-    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "updated_by")
-    private Integer updatedBy;
+    private int updatedBy;
 
-    @Column(name = "is_active", length = 5)
     private String isActive;
 
     @ManyToMany(cascade = CascadeType.ALL)

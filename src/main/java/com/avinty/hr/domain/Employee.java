@@ -23,27 +23,18 @@ public class Employee {
     private Integer id;
 
     private String email;
-
     private String password;
-
     private String fullName;
-
     private int depId;
-
     private LocalDateTime createdAt;
-
     private int createdBy;
-
     private LocalDateTime updatedAt;
-
     private int updatedBy;
-
     private String isActive;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "employee_department", joinColumns = @JoinColumn(name = "emp_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "dep_id", referencedColumnName = "id"))
-    private List<Department> departments = new ArrayList<>();
-
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name="dep_id")
+//    private Department department;
 
 
 }

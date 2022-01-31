@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -19,37 +20,15 @@ public class Department {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
 
-//        @Column(name ="name")
         private String name;
-
-//        @Column(name = "manager_id")
         private Integer managerId;
-
-//        @Column(name = "created_at")
-//        @CreationTimestamp
         private LocalDateTime createdAt;
-
-//        @Column(name = "created_by")
         private Integer createdBy;
-
-//        @Column(name = "updated_at")
-//        @CreationTimestamp
         private LocalDateTime updatedAt;
-
-//        @Column(name = "updated_by")
         private Integer updatedBy;
 
+//    @OneToMany(mappedBy = "department")
+//    private List<Employee> employees;
 
-//        @ManyToMany(mappedBy = "departments")
-//        private List<Employee> employees = new ArrayList<>();
-
-
-//    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Employee.class)
-//    @JoinColumn(name = "id", insertable = false, updatable = false)
-//    private Employee employee;
-
-//        public void addEmployee(Employee employee) {
-//            employees.add(employee);
-//        }
 
 }
